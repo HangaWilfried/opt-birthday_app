@@ -44,8 +44,7 @@ export default {
     },
     saveBirthInfo(){
       this.$emit('addBirthDay', {
-        lastname: this.lastname,
-        firstname: this.firstname,
+        fullname:  `${this.lastname} ${this.firstname}`,
         birth: {
           day: this.day[new Date(`${this.fullbirth}`).getDay()],
           date: new Date(`${this.fullbirth}`).getDate(),

@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <p class="important">{{lastname}} {{firstname}}</p>
+    <p class="important">{{fullname}}</p>
     <p><span class="next">next Birth day:</span> <span class="important">{{`${date} ${month} ${new Date().getFullYear()+1}`}}</span></p>
     <p class="important">less than {{deadline}} Days.</p>
   </div>
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'Birth',
-  props:['items','index','lastname','firstname','deadline','date','month'],
+  props:['items','index','fullname','deadline','date','month'],
   methods: {
     deleteFromItem(index) {
       this.items.splice(index, 1);
@@ -29,7 +29,7 @@ export default {
     box-shadow: 1px 1px 10px #000;
   }
   .important{
-    padding: 5px 10px;
+    padding: 10px 7px 5px 7px;
     color: #000;
     background-color: #fff;
     border-radius: 5px;

@@ -4,7 +4,7 @@
     <Form @addBirthDay="addToBirthDayList" />
     <section>
       <article v-for="(item, index) in Births" :key="index" v-bind:style="{backgroundColor: item.randColor, color: '#fff'}">
-        <Birth :items="Births" :index="index" :lastname="item.lastname"
+        <Birth :items="Births" :index="index" :fullname="item.fullname"
         :firstname="item.firstname" :deadline="item.deadline" :date="item.birth.date" :month="item.birth.month"/>
       </article>
     </section>
@@ -29,8 +29,14 @@ export default {
   },
   methods: {
     addToBirthDayList(obj) {
-      this.Births.push(obj);
-      console.log(this.Births);
+      let flag = false;      
+      this.Births.some(item => flag = item.fullname == obj.fullname); 
+      if(flag == false){
+        this.Births.push(obj); 
+      }    
+      else{
+        alert('deja renseigne')
+      }
       localStorage.setItem('value', JSON.stringify(this.Births))
     }
   },
