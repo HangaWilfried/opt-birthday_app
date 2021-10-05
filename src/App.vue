@@ -26,12 +26,17 @@ export default {
     addToBirthDayList(obj) {
       this.Births.push(obj);
       console.log(this.Births);
+      localStorage.setItem('value', JSON.stringify(this.Births))
     }
   },
   computed:{
     someOfBirth(){
       return this.Births.length;
     }
+  },
+  created(){
+    if(localStorage.getItem('value'))
+    this.Births = JSON.parse(localStorage.getItem('value'))
   }
 }
 </script>

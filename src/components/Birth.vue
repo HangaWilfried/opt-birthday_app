@@ -20,6 +20,7 @@ export default {
   methods: {
     deleteFromItem(index) {
       this.items.splice(index, 1);
+      localStorage.setItem('value',JSON.stringify(this.items))
     }
   }
 }
