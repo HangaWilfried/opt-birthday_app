@@ -1,22 +1,18 @@
 <template>
-  <article v-for="(item, index) in items" :key="index" v-bind:style="{backgroundColor: item.randColor, color: '#fff'}">
-    <div class="info">
-      <p class="important">{{item.lastname}} {{item.firstname}}</p>
-      <p><span>next Birth day:</span> <span class="important">{{`${item.birth.date} ${item.birth.month} ${new Date().getFullYear()+1}`}}</span></p>
-      <p class="important">less than {{item.deadline}} Days.</p>
-    </div>
-    <div>
-      <p class="delete"><span @click="deleteFromItem(index)">x</span></p>
-    </div>
-  </article>
+  <div class="info">
+    <p class="important">{{lastname}} {{firstname}}</p>
+    <p><span class="next">next Birth day:</span> <span class="important">{{`${date} ${month} ${new Date().getFullYear()+1}`}}</span></p>
+    <p class="important">less than {{deadline}} Days.</p>
+  </div>
+  <div>
+    <p class="delete"><span @click="deleteFromItem(index)">x</span></p>
+  </div>  
 </template>
 
 <script>
 export default {
   name: 'Birth',
-  props: {
-    items: Array
-  },
+  props:['items','index','lastname','firstname','deadline','date','month'],
   methods: {
     deleteFromItem(index) {
       this.items.splice(index, 1);
@@ -28,14 +24,6 @@ export default {
 </script>
 
 <style scoped>
-  article{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    margin-bottom: 1px;
-  }
   .info{
     padding: 20px;
     box-shadow: 1px 1px 10px #000;
@@ -55,5 +43,4 @@ export default {
   .delete span:hover{
     cursor: pointer;
   }
-
 </style>
