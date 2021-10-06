@@ -4,8 +4,7 @@
     <Form @addBirthDay="addToBirthDayList" />
     <section>
       <article v-for="(item, index) in Births" :key="index" v-bind:style="{backgroundColor: item.randColor, color: '#fff'}">
-        <Birth :items="Births" :index="index" :fullname="item.fullname"
-        :firstname="item.firstname" :deadline="item.deadline" :date="item.birth.date" :month="item.birth.month"/>
+        <Birth :fullname="item.fullname" :deadline="item.deadline" :date="item.birth.date" :month="item.birth.month" @remove="deleteFromItem(index)"/>
       </article>
     </section>
   </main>
@@ -38,6 +37,10 @@ export default {
         alert('deja renseigne')
       }
       localStorage.setItem('value', JSON.stringify(this.Births))
+    },
+    deleteFromItem(index) {
+      this.Births.splice(index, 1);
+      localStorage.setItem('value',JSON.stringify(this.Births))
     }
   },
   computed:{
