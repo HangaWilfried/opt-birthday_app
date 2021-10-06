@@ -5,22 +5,17 @@
     <p class="important">less than {{deadline}} Days.</p>
   </div>
   <div>
-    <p class="delete"><span @click="deleteFromItem(index)">x</span></p>
+    <p class="delete"><span><ion-icon name="close-outline" @click="$emit('remove')"></ion-icon></span></p>
+    <!--  -->
   </div>  
 </template>
 
 <script>
 export default {
   name: 'Birth',
-  props:['items','index','fullname','deadline','date','month'],
-  methods: {
-    deleteFromItem(index) {
-      this.items.splice(index, 1);
-      localStorage.setItem('value',JSON.stringify(this.items))
-    }
-  }
+  props:['fullname','deadline','date','month'],
+  emits:['remove']
 }
-
 </script>
 
 <style scoped>
