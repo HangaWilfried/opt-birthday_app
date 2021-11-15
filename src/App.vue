@@ -3,9 +3,9 @@
     <Header :total="countBirthdays" />
     <Form @submit="addNewBirthday" />
     <section>
-      <template v-for="(birthday, index) in birthdays" :key="index" v-bind:style="{backgroundColor: birthday.randomColor, color: '#fff'}">
+      <article v-for="(birthday, index) in birthdays" :key="index" v-bind:style="{backgroundColor: birthday.randomColor, color: '#fff'}">
         <Birth :fullName="birthday.fullName" :remaining="birthday.getRemainingDays" :date="birthday.dateOfBirth.date" :month="birthday.dateOfBirth.month" @remove="deleteBirthday(index)"/>
-      </template>
+      </article>
     </section>
   </main>
 </template>
@@ -30,11 +30,14 @@ export default {
     addNewBirthday(obj) {
       let haveBeenAdded = false;
       haveBeenAdded = this.birthdays.some(item => item.fullName === obj.fullName)
-      if( haveBeenAdded === false){
+      if(obj.fullName === undefined || obj.birthInfo === undefined) {
+        alert('veuillez remplir les champs vides svp')
+      }
+      else if( haveBeenAdded === false){
         this.birthdays.push(obj);
       }
       else{
-        alert('deja renseigne')
+        alert('ces informations ont deja ete renseigne. il se peut que vous vous soyez trompe')
       }
       localStorage.setItem('value', JSON.stringify(this.birthdays))
     },
