@@ -3,14 +3,14 @@ import Birth from '../../src/components/Birth.vue'
 
 describe('Birth.vue', () => {
     it('render props when they are called', () => {
-        const fullname = 'Hanga Lagoue Wilfried Junior'
-        const deadline = 302
+        const fullName = 'Hanga Lagoue Wilfried Junior'
+        const remaining = 302
         const month = 'Dec'
         const date = 12
         const wrapper = mount(Birth, {
             props: {
-                fullname,
-                deadline,
+                fullName,
+                remaining,
                 date,
                 month
             }

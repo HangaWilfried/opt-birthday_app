@@ -1,8 +1,8 @@
 <template>
   <div class="info">
-    <p class="important">{{fullname}}</p>
+    <p class="important">{{fullName}}</p>
     <p><span class="next">next Birth day:</span> <span class="important">{{`${date} ${month} ${new Date().getFullYear()+1}`}}</span></p>
-    <p class="important">less than {{deadline}} Days.</p>
+    <p class="important">less than {{remaining}} Days.</p>
   </div>
   <div>
     <p class="delete"><span @click="$emit('remove')">x</span></p>
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'Birth',
-  props:['fullname','deadline','date','month'],
+  props:['fullName','remaining','date','month'],
   emits:['remove']
 }
 </script>

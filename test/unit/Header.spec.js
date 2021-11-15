@@ -3,19 +3,19 @@ import Header from "../../src/components/Header";
 
 describe('Header', () => {
     it('check if it\'s render without issues', () => {
-        const totalOfBirth = 3
+        const total = 3
         const wrapper = mount(Header, {
             props: {
-                totalOfBirth
+                total
             }
         })
         expect(wrapper.text()).toContain(3)
     })
     it('renders computed value getNextYear', () => {
-        const getNextYear = 2022
+        const nextYear = 2022
         const wrapper = mount(Header, {
             computed: {
-                getNextYear
+                nextYear
             }
         })
         expect(wrapper.text()).toContain(2022)

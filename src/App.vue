@@ -1,10 +1,10 @@
 <template>
   <main>
-    <Header :totalOfBirth="someOfBirth" />
-    <Form @addBirthDay="addToBirthDayList" />
+    <Header :total="countBirthdays" />
+    <Form @submit="addNewBirthday" />
     <section>
-      <article v-for="(item, index) in Births" :key="index" v-bind:style="{backgroundColor: item.randColor, color: '#fff'}">
-        <Birth :fullname="item.fullname" :deadline="item.deadline" :date="item.birth.date" :month="item.birth.month" @remove="deleteFromItem(index)"/>
+      <article v-for="(birthday, index) in birthdays" :key="index" v-bind:style="{backgroundColor: birthday.randomColor, color: '#fff'}">
+        <Birth :fullName="birthday.fullName" :remaining="birthday.getRemainingDays" :date="birthday.dateOfBirth.date" :month="birthday.dateOfBirth.month" @remove="deleteBirthday(index)"/>
       </article>
     </section>
   </main>
@@ -23,34 +23,37 @@ export default {
   },
   data() {
     return {
-      Births: []
+      birthdays: []
     }
   },
   methods: {
-    addToBirthDayList(obj) {
-      let flag = false;      
-      this.Births.some(item => flag = item.fullname == obj.fullname); 
-      if(flag == false){
-        this.Births.push(obj); 
-      }    
-      else{
-        alert('deja renseigne')
+    addNewBirthday(obj) {
+      let haveBeenAdded = false;
+      haveBeenAdded = this.birthdays.some(item => item.fullName === obj.fullName)
+      if(obj.fullName === undefined || obj.birthInfo === undefined) {
+        alert('veuillez remplir les champs vides svp')
       }
-      localStorage.setItem('value', JSON.stringify(this.Births))
+      else if( haveBeenAdded === false){
+        this.birthdays.push(obj);
+      }
+      else{
+        alert('ces informations ont deja ete renseigne. il se peut que vous vous soyez trompe')
+      }
+      localStorage.setItem('value', JSON.stringify(this.birthdays))
     },
-    deleteFromItem(index) {
-      this.Births.splice(index, 1);
-      localStorage.setItem('value',JSON.stringify(this.Births))
+    deleteBirthday(index) {
+      this.birthdays.splice(index, 1);
+      localStorage.setItem('value',JSON.stringify(this.birthdays))
     }
   },
   computed:{
-    someOfBirth(){
-      return this.Births.length;
+    countBirthdays(){
+      return this.birthdays.length;
     }
   },
   created(){
     if(localStorage.getItem('value'))
-    this.Births = JSON.parse(localStorage.getItem('value'))
+    this.birthdays = JSON.parse(localStorage.getItem('value'))
   }
 }
 </script>
@@ -66,7 +69,7 @@ export default {
     justify-content: space-between;
     padding: 10px 20px;
     margin-bottom: 1px;
-  } 
+  }
   @media only screen and (min-width: 925px) {
     section{
       display: flex;

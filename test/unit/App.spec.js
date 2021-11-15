@@ -9,38 +9,38 @@ describe('App.vue', () => {
         const wrapper = mount(App, {
             data () {
                 return {
-                    Births: []
+                    birthdays: []
                 }
             }
         })
         expect(wrapper.findAllComponents(Birth).length).toBe(0)
-        wrapper.vm.addToBirthDayList({
-            fullname: 'lagoue junior',
-            birth: {
+        wrapper.vm.addNewBirthday({
+            fullName: 'lagoue junior',
+            dateOfBirth: {
                 day: 'Sat',
                 date: 27,
                 month: 'May',
                 year: 2000
             },
-            randColor: '#4287f5',
-            deadline: 220
+            randomColor: '#4287f5',
+            getRemainingDays: 220
         })
         await nextTick()
         expect(wrapper.findAllComponents(Birth).length).toBe(1)
-        wrapper.vm.addToBirthDayList({
-            fullname: 'junior dima',
-            birth: {
+        wrapper.vm.addNewBirthday({
+            fullName: 'junior dima',
+            dateOfBirth: {
                 day: 'Sat',
                 date: 27,
                 month: 'May',
                 year: 2000
             },
-            randColor: '#4287f5',
-            deadline: 220
+            randomColor: '#4287f5',
+            getRemainingDays: 220
         })
         await nextTick()
         expect(wrapper.findAllComponents(Birth).length).toBe(2)
-        wrapper.vm.deleteFromItem(1)
+        wrapper.vm.deleteBirthday(1)
         await nextTick()
         expect(wrapper.findAllComponents(Birth).length).toBe(1)
     })
