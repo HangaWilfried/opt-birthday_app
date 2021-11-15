@@ -1,8 +1,8 @@
 <template>
   <header>
-    <div><h5>added - {{totalOfBirth}}</h5></div>
+    <div><h5>added - {{total}}</h5></div>
     <div class="about">
-      <strong>{{new Date().getFullYear()+1}}</strong>
+      <strong>{{nextYear}}</strong>
       <span>BirthDays</span>
     </div>
   </header>
@@ -12,7 +12,12 @@
 export default {
   name: 'Header',
   props:{
-    totalOfBirth : Number
+    total : Number
+  },
+  computed:{
+    nextYear(){
+      return new Date().getFullYear()+1
+    }
   }
 }
 </script>

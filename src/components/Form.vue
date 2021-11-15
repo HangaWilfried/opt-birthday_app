@@ -1,9 +1,9 @@
 <template>
   <div>
-    <input type="text" placeholder="last name" v-model="lastname">
-    <input type="text" placeholder="first name" v-model="firstname">
-    <input type="date" v-model="fullbirth">
-    <button @click.prevent="saveBirthInfo">complete</button>
+    <input type="text" placeholder="last name" v-model="lastName">
+    <input type="text" placeholder="first name" v-model="firstName">
+    <input type="date" v-model="birthInfo">
+    <button @click.prevent="submit">complete</button>
   </div>
 </template>
 
@@ -12,9 +12,9 @@ export default {
   name: 'Form',
   data(){
     return{
-      lastname: '',
-      firstname: '',
-      fullbirth: '',
+      lastName: '',
+      firstName: '',
+      birthInfo: '',
       month: ['Jan', 'Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
       day: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
       colors: ['#4287f5', '#b771e3', '#6e0e4c', '#0e6e4b', '#28c78d', '#80d983', '#a5d980', '#cfd980', '#d9cd80', '#d9b480', '#d99b80']
@@ -24,35 +24,33 @@ export default {
     getRandomColor() {
       return this.colors[Math.floor(Math.random() * (11 - 0)) + 0]
     },
-    getDeadLine(){
-      let givenDate = new Date(`${this.fullbirth}`);
-      let time1 = new Date();
-      time1.setDate(givenDate.getDate());
-      time1.setMonth(givenDate.getMonth());
-      time1.setFullYear(new Date().getFullYear()+1);
-      let givenDay = time1.getDate(),
-          givenMonth = time1.getMonth(),
-          givenYear = time1.getFullYear();
+    getRemainingDays(){
+      const dateOfBirth = new Date(`${this.birthInfo}`);
+      const timeOfBirth = new Date();
+      timeOfBirth.setDate(dateOfBirth.getDate());
+      timeOfBirth.setMonth(dateOfBirth.getMonth());
+      timeOfBirth.setFullYear(new Date().getFullYear()+1);
+      const dayOfBirth = timeOfBirth.getDate(),
+          monthOfBirth = timeOfBirth.getMonth(),
+          yearOfBirth = timeOfBirth.getFullYear();
 
 
-      let time2 = new Date();
-      let currentDate = new Date(`${time2.getFullYear()},${time2.getMonth()},${time2.getDate()}`)
-
-      let futureBirth = new Date(`${givenYear},${givenMonth},${givenDay}`)
-      let deadline =  futureBirth - currentDate
-      return Math.floor(deadline/(24*3600000));
+      const now = new Date();
+      const today = new Date(`${now.getFullYear()},${now.getMonth()},${now.getDate()}`)
+      const dateOfBirthday = new Date(`${yearOfBirth},${monthOfBirth},${dayOfBirth}`)
+      return Math.floor((dateOfBirthday - today)/(24*3600000))
     },
-    saveBirthInfo(){
-      this.$emit('addBirthDay', {
-        fullname:  `${this.lastname} ${this.firstname}`,
-        birth: {
-          day: this.day[new Date(`${this.fullbirth}`).getDay()],
-          date: new Date(`${this.fullbirth}`).getDate(),
-          month: this.month[new Date(`${this.fullbirth}`).getMonth()],
-          year: new Date(`${this.fullbirth}`).getFullYear()
+    submit(){
+      this.$emit('submit', {
+        fullName:  `${this.lastName} ${this.firstName}`,
+        dateOfBirth: {
+          day: this.day[new Date(`${this.birthInfo}`).getDay()],
+          date: new Date(`${this.birthInfo}`).getDate(),
+          month: this.month[new Date(`${this.birthInfo}`).getMonth()],
+          year: new Date(`${this.birthInfo}`).getFullYear()
         },
-        randColor: this.getRandomColor(),
-        deadline: this.getDeadLine()
+        randomColor: this.getRandomColor(),
+        getRemainingDays: this.getRemainingDays()
       })
     }
   }
