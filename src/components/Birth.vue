@@ -5,9 +5,8 @@
     <p class="important">less than {{deadline}} Days.</p>
   </div>
   <div>
-    <p class="delete"><span><ion-icon name="close-outline" @click="$emit('remove')"></ion-icon></span></p>
-    <!--  -->
-  </div>  
+    <p class="delete"><span @click="$emit('remove')">x</span></p>
+  </div>
 </template>
 
 <script>

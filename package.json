@@ -1,15 +1,25 @@
 {
-  "name": "todo",
+  "name": "tutoriel",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "jest"
   },
   "dependencies": {
-    "vue": "^3.0.4"
+    "vue": "^3.2.19",
+    "vue-jest": "^5.0.0-alpha.10",
+    "@babel/core": "^7.5.0",
+    "babel-jest": "^26.3.1",
+    "@babel/preset-env": "^7.5.0"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.4",
-    "vite": "^1.0.0-rc.13"
+    "vite": "^2.6.4",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/test-utils": "^2.0.0-rc.16",
+    "jest": "^26.3.1",
+    "vue-jest": "^5.0.0-alpha.10"
   }
 }
